@@ -44,6 +44,7 @@
 @property(nonatomic) UITableViewCellSeparatorStyle separatorStyle;
 
 @property(nonatomic) CGFloat topMargin;
+@property (nonatomic) CGFloat autoCompleteWidth;
 
 + (TRAutocompleteView *)autocompleteViewBindedTo:(UITextField *)textField
                                      usingSource:(id <TRAutocompleteItemsSource>)itemsSource

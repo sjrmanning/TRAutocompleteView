@@ -113,6 +113,7 @@
     self.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     self.topMargin = 0;
+    self.autoCompleteWidth = -1.f;
 }
 
 - (void)keyboardWasShown:(NSNotification *)notification
@@ -142,12 +143,27 @@
 
     self.frame = CGRectMake(_queryTextField.frame.origin.x,
                             calculatedY,
-                            _queryTextField.frame.size.width,
+                            [self viewWidth],
                             calculatedHeight);
     _table.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
 }
 
+- (CGFloat)viewWidth
+{
+    if (self.autoCompleteWidth > 0.f) {
+        return self.autoCompleteWidth;
+    }
+    else {
+        return _queryTextField.frame.size.width;
+    }
+}
+
 - (void)keyboardWillHide:(NSNotification *)notification
+{
+    [self hideSelf];
+}
+
+- (void)hideSelf
 {
     [self removeFromSuperview];
     _visible = NO;
@@ -183,6 +199,11 @@
     {
         self.suggestions = nil;
         [_table reloadData];
+
+        // Hide self if text field cleared.
+        if ([_queryTextField.text length] == 0) {
+            [self hideSelf];
+        }
     }
 }
 

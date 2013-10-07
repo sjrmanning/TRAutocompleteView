@@ -151,7 +151,7 @@
 
 - (CGFloat)viewOriginX
 {
-    if (self.autoCompleteOriginX > 0.f) {
+    if (self.autoCompleteOriginX >= 0.f) {
         return self.autoCompleteOriginX;
     }
     else {

@@ -114,6 +114,7 @@
 
     self.topMargin = 0;
     self.autoCompleteWidth = -1.f;
+    self.autoCompleteOriginX = -1.f;
 }
 
 - (void)keyboardWasShown:(NSNotification *)notification
@@ -141,11 +142,21 @@
 
     calculatedHeight += _contextController.tabBarController.tabBar.frame.size.height; //keyboard is shown over it, need to compensate
 
-    self.frame = CGRectMake(_queryTextField.frame.origin.x,
+    self.frame = CGRectMake([self viewOriginX],
                             calculatedY,
                             [self viewWidth],
                             calculatedHeight);
     _table.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+}
+
+- (CGFloat)viewOriginX
+{
+    if (self.autoCompleteOriginX > 0.f) {
+        return self.autoCompleteOriginX;
+    }
+    else {
+        return _queryTextField.frame.origin.x;
+    }
 }
 
 - (CGFloat)viewWidth

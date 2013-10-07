@@ -45,6 +45,7 @@
 
 @property(nonatomic) CGFloat topMargin;
 @property (nonatomic) CGFloat autoCompleteWidth;
+@property (nonatomic) CGFloat autoCompleteOriginX;
 
 + (TRAutocompleteView *)autocompleteViewBindedTo:(UITextField *)textField
                                      usingSource:(id <TRAutocompleteItemsSource>)itemsSource
